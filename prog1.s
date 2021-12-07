@@ -9,18 +9,21 @@ _Z5func1PdS_:
 	movq	%rsp, %rbp
 .LCFI1:
 	pushq	%rbx
+    pushq   %r12
+    pushq   %r13
+    pushq   %r14
 	subq	$40, %rsp
 .LCFI2:
-	movq	%rdi, -40(%rbp)
-	movq	%rsi, -48(%rbp)
-	movl	$0, %ecx
+	movq	%rdi, %r13
+	movq	%rsi, %r14
+	movl	$0, %r12
 .L3:
-	cmpl	$49999999, %ecx
+	cmpl	$49999999, %r12d
 	jg	.L2
-	movl	%ecx, %eax
+	movl	%r12d, %eax
 	cltq
 	leaq	0(,%rax,8), %rdx
-	movq	-40(%rbp), %rax
+	movq	%r13, %rax
 	leaq	(%rdx,%rax), %rbx
 	call	rand
 	pxor	%xmm0, %xmm0
@@ -32,10 +35,10 @@ _Z5func1PdS_:
 	movsd	.LC2(%rip), %xmm1
 	subsd	%xmm1, %xmm0
 	movsd	%xmm0, (%rbx)
-	movl	%ecx, %eax
+	movl	%r12d, %eax
 	cltq
 	leaq	0(,%rax,8), %rdx
-	movq	-48(%rbp), %rax
+	movq	%r14, %rax
 	leaq	(%rdx,%rax), %rbx
 	call	rand
 	pxor	%xmm0, %xmm0
@@ -47,11 +50,14 @@ _Z5func1PdS_:
 	movsd	.LC2(%rip), %xmm1
 	subsd	%xmm1, %xmm0
 	movsd	%xmm0, (%rbx)
-	leal	[%ecx + 1], %ecx
+	addl	$1, %r12d
 	jmp	.L3
 .L2:
 	movl	$0, %eax
 	addq	$40, %rsp
+    popq    %r14
+    popq    %r13
+    popq    %r12
 	popq	%rbx
 	popq	%rbp
 .LCFI3:
