@@ -94,8 +94,7 @@ _Z5func2PdS_:
 	movq	(%rax), %rax
 	movq	%rax, %xmm0
 	call	sin
-	movsd	%xmm0, -24(%rbp) 
-	
+	movsd	%xmm0, -24(%rbp)
 	
 	leaq	0(,%r12,8), %rdx
 	movq	%r14, %rax
@@ -108,7 +107,93 @@ _Z5func2PdS_:
 	movsd	-8(%rbp), %xmm1
 	addsd	%xmm1, %xmm0
 	movsd	%xmm0, -8(%rbp)
-	addl	$1, %r12d
+	
+	
+	leaq	8(,%r12,8), %rdx
+	movq	%r13, %rax
+	addq	%rdx, %rax
+	movq	(%rax), %rax
+	movq	%rax, %xmm0
+	call	sin
+	movsd	%xmm0, -24(%rbp)
+	
+	leaq	8(,%r12,8), %rdx
+	movq	%r14, %rax
+	addq	%rdx, %rax
+	movq	(%rax), %rax
+	movq	%rax, %xmm0
+	call	cos
+	
+	mulsd	-24(%rbp), %xmm0
+	movsd	-8(%rbp), %xmm1
+	addsd	%xmm1, %xmm0
+	movsd	%xmm0, -8(%rbp)
+	
+	
+	leaq	16(,%r12,8), %rdx
+	movq	%r13, %rax
+	addq	%rdx, %rax
+	movq	(%rax), %rax
+	movq	%rax, %xmm0
+	call	sin
+	movsd	%xmm0, -24(%rbp)
+	
+	leaq	16(,%r12,8), %rdx
+	movq	%r14, %rax
+	addq	%rdx, %rax
+	movq	(%rax), %rax
+	movq	%rax, %xmm0
+	call	cos
+	
+	mulsd	-24(%rbp), %xmm0
+	movsd	-8(%rbp), %xmm1
+	addsd	%xmm1, %xmm0
+	movsd	%xmm0, -8(%rbp)
+	
+	
+	leaq	24(,%r12,8), %rdx
+	movq	%r13, %rax
+	addq	%rdx, %rax
+	movq	(%rax), %rax
+	movq	%rax, %xmm0
+	call	sin
+	movsd	%xmm0, -24(%rbp)
+	
+	leaq	24(,%r12,8), %rdx
+	movq	%r14, %rax
+	addq	%rdx, %rax
+	movq	(%rax), %rax
+	movq	%rax, %xmm0
+	call	cos
+	
+	mulsd	-24(%rbp), %xmm0
+	movsd	-8(%rbp), %xmm1
+	addsd	%xmm1, %xmm0
+	movsd	%xmm0, -8(%rbp)
+	
+	
+	leaq	32(,%r12,8), %rdx
+	movq	%r13, %rax
+	addq	%rdx, %rax
+	movq	(%rax), %rax
+	movq	%rax, %xmm0
+	call	sin
+	movsd	%xmm0, -24(%rbp)
+	
+	leaq	32(,%r12,8), %rdx
+	movq	%r14, %rax
+	addq	%rdx, %rax
+	movq	(%rax), %rax
+	movq	%rax, %xmm0
+	call	cos
+	
+	mulsd	-24(%rbp), %xmm0
+	movsd	-8(%rbp), %xmm1
+	addsd	%xmm1, %xmm0
+	movsd	%xmm0, -8(%rbp)
+	
+	
+	addl	$5, %r12d
 	jmp	.L7
 .L6:
 	movsd	-8(%rbp), %xmm0
