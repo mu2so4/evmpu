@@ -9,21 +9,24 @@ _Z5func1PdS_:
 	movq	%rsp, %rbp
 .LCFI1:
 	pushq	%rbx
-	subq	$40, %rsp
+	pushq   %r12
+	pushq   %r13
+	pushq   %r14
+	subq	$16, %rsp
 .LCFI2:
-	movq	%rdi, -40(%rbp)
-	movq	%rsi, -48(%rbp)
-	movl	$0, -20(%rbp)
+	movq	%rdi, %r13
+	movq	%rsi, %r14
+	xorq	%r12, %r12
 .L3:
-	cmpl	$49999999, -20(%rbp)
+	cmpl	$49999999, %r12d
 	jg	.L2
-	movl	-20(%rbp), %eax
+	movl	%r12d, %eax
 	cltq
 	leaq	0(,%rax,8), %rdx
-	movq	-40(%rbp), %rax
+	movq	%r13, %rax
 	leaq	(%rdx,%rax), %rbx
 	call	rand
-	pxor	%xmm0, %xmm0
+	pxor	%xmm0, %xmm0 #don't remove
 	cvtsi2sd	%eax, %xmm0
 	movsd	.LC0(%rip), %xmm1
 	mulsd	%xmm1, %xmm0
@@ -32,13 +35,13 @@ _Z5func1PdS_:
 	movsd	.LC2(%rip), %xmm1
 	subsd	%xmm1, %xmm0
 	movsd	%xmm0, (%rbx)
-	movl	-20(%rbp), %eax
+	movl	%r12d, %eax
 	cltq
 	leaq	0(,%rax,8), %rdx
-	movq	-48(%rbp), %rax
+	movq	%r14, %rax
 	leaq	(%rdx,%rax), %rbx
 	call	rand
-	pxor	%xmm0, %xmm0
+	pxor	%xmm0, %xmm0 #don't remove
 	cvtsi2sd	%eax, %xmm0
 	movsd	.LC0(%rip), %xmm1
 	mulsd	%xmm1, %xmm0
@@ -47,11 +50,14 @@ _Z5func1PdS_:
 	movsd	.LC2(%rip), %xmm1
 	subsd	%xmm1, %xmm0
 	movsd	%xmm0, (%rbx)
-	addl	$1, -20(%rbp)
+	addl	$1, %r12d
 	jmp	.L3
 .L2:
-	movl	$0, %eax
-	addq	$40, %rsp
+	xorq	%rax, %rax
+	addq	$16, %rsp
+	popq    %r14
+	popq    %r13
+	popq    %r12
 	popq	%rbx
 	popq	%rbp
 .LCFI3:
@@ -66,45 +72,49 @@ _Z5func2PdS_:
 .LCFI4:
 	movq	%rsp, %rbp
 .LCFI5:
-	subq	$48, %rsp
-	movq	%rdi, -24(%rbp)
-	movq	%rsi, -32(%rbp)
+	pushq	%r12
+	pushq	%r13
+	pushq	%r14
+	subq	$32, %rsp
+	movq	%rdi, %r13
+	movq	%rsi, %r14
 	pxor	%xmm0, %xmm0
 	movsd	%xmm0, -8(%rbp)
-	movl	$0, -12(%rbp)
+	xorq	%r12, %r12
 .L7:
-	cmpl	$49999999, -12(%rbp)
+	cmpl	$49999999, %r12d
 	jg	.L6
-	movl	-12(%rbp), %eax
+	movl	%r12d, %eax
 	cltq
 	leaq	0(,%rax,8), %rdx
-	movq	-24(%rbp), %rax
+	movq	%r13, %rax
 	addq	%rdx, %rax
 	movq	(%rax), %rax
-	movq	%rax, -40(%rbp)
-	movsd	-40(%rbp), %xmm0
+	movq	%rax, %xmm0
 	call	sin
 	movapd	%xmm0, %xmm1
 	movsd	.LC4(%rip), %xmm0
 	mulsd	%xmm0, %xmm1
-	movsd	%xmm1, -40(%rbp)
-	movl	-12(%rbp), %eax
+	movsd	%xmm1, -24(%rbp)
+	movl	%r12d, %eax
 	cltq
 	leaq	0(,%rax,8), %rdx
-	movq	-32(%rbp), %rax
+	movq	%r14, %rax
 	addq	%rdx, %rax
 	movq	(%rax), %rax
-	movq	%rax, -48(%rbp)
-	movsd	-48(%rbp), %xmm0
+	movq	%rax, %xmm0
 	call	cos
-	mulsd	-40(%rbp), %xmm0
+	mulsd	-24(%rbp), %xmm0
 	movsd	-8(%rbp), %xmm1
 	addsd	%xmm1, %xmm0
 	movsd	%xmm0, -8(%rbp)
-	addl	$1, -12(%rbp)
+	addl	$1, %r12d
 	jmp	.L7
 .L6:
 	movsd	-8(%rbp), %xmm0
+	popq	%r14
+	popq	%r13
+	popq	%r12
 	leave
 .LCFI6:
 	ret
