@@ -50,8 +50,8 @@ _Z5func1PdS_:
 	movsd	%xmm0, (%rbx)
 
     
-    movl	%r12d, %eax
-	leaq	4(,%rax,8), %rdx
+	movl	%r12d, %eax
+	leaq	8(,%rax,8), %rdx
 	leaq	(%rdx,%r13), %rbx
 	call	rand
 	pxor	%xmm0, %xmm0
@@ -79,7 +79,7 @@ _Z5func1PdS_:
 	movsd	%xmm0, (%rbx)
 
 
-    movl	%r12d, %eax
+	movl	%r12d, %eax
 	leaq	16(,%rax,8), %rdx
 	leaq	(%rdx,%r13), %rbx
 	call	rand
@@ -108,7 +108,7 @@ _Z5func1PdS_:
 	movsd	%xmm0, (%rbx)
 
 
-    movl	%r12d, %eax
+    	movl	%r12d, %eax
 	leaq	24(,%rax,8), %rdx
 	leaq	(%rdx,%r13), %rbx
 	call	rand
@@ -137,7 +137,7 @@ _Z5func1PdS_:
 	movsd	%xmm0, (%rbx)
 
 
-    movl	%r12d, %eax
+    	movl	%r12d, %eax
 	leaq	32(,%rax,8), %rdx
 	leaq	(%rdx,%r13), %rbx
 	call	rand
