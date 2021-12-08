@@ -20,33 +20,42 @@ _Z5func1PdS_:
 .L3:
 	cmpl	$49999999, %r12d
 	jg	.L2
+	
 	movl	%r12d, %eax
 	cltq
 	leaq	0(,%rax,8), %rdx
-	movq	%r13, %rax
-	leaq	(%rdx,%rax), %rbx
+	leaq	(%rdx,%r13), %rbx #changed
 	call	rand
 	pxor	%xmm0, %xmm0 #don't remove
+	
 	cvtsi2sd	%eax, %xmm0
-	movsd	.LC0(%rip), %xmm1
-	mulsd	%xmm1, %xmm0
-	movsd	.LC1(%rip), %xmm1
-	divsd	%xmm1, %xmm0
+	movsd	.LC0(%rip), %xmm1 #remove
+	mulsd	%xmm1, %xmm0 #remove
+	movsd	.LC1(%rip), %xmm1 #remove
+	divsd	%xmm1, %xmm0 #remove
+	#movsd	.LC3(%rip), %xmm1
+	#divsd	%xmm1, %xmm0
+	
 	movsd	.LC2(%rip), %xmm1
 	subsd	%xmm1, %xmm0
 	movsd	%xmm0, (%rbx)
+	
+	
 	movl	%r12d, %eax
 	cltq
 	leaq	0(,%rax,8), %rdx
-	movq	%r14, %rax
-	leaq	(%rdx,%rax), %rbx
+	leaq	(%rdx,%r14), %rbx #changed
 	call	rand
 	pxor	%xmm0, %xmm0 #don't remove
+	
 	cvtsi2sd	%eax, %xmm0
-	movsd	.LC0(%rip), %xmm1
-	mulsd	%xmm1, %xmm0
-	movsd	.LC1(%rip), %xmm1
-	divsd	%xmm1, %xmm0
+	movsd	.LC0(%rip), %xmm1 #remove
+	mulsd	%xmm1, %xmm0 #remove
+	movsd	.LC1(%rip), %xmm1 #remove
+	divsd	%xmm1, %xmm0 #remove
+	#movsd	.LC3(%rip), %xmm1
+	#divsd	%xmm1, %xmm0
+	
 	movsd	.LC2(%rip), %xmm1
 	subsd	%xmm1, %xmm0
 	movsd	%xmm0, (%rbx)
@@ -84,26 +93,30 @@ _Z5func2PdS_:
 .L7:
 	cmpl	$49999999, %r12d
 	jg	.L6
-	movl	%r12d, %eax
+	
 	cltq
-	leaq	0(,%rax,8), %rdx
+	leaq	0(,%r12,8), %rdx #changed
 	movq	%r13, %rax
 	addq	%rdx, %rax
 	movq	(%rax), %rax
 	movq	%rax, %xmm0
 	call	sin
+	
 	movapd	%xmm0, %xmm1
 	movsd	.LC4(%rip), %xmm0
 	mulsd	%xmm0, %xmm1
 	movsd	%xmm1, -24(%rbp)
-	movl	%r12d, %eax
+	#movsd	%xmm0, -24(%rbp)
+	
+	
 	cltq
-	leaq	0(,%rax,8), %rdx
+	leaq	0(,%r12,8), %rdx #changed
 	movq	%r14, %rax
 	addq	%rdx, %rax
 	movq	(%rax), %rax
 	movq	%rax, %xmm0
 	call	cos
+	
 	mulsd	-24(%rbp), %xmm0
 	movsd	-8(%rbp), %xmm1
 	addsd	%xmm1, %xmm0
@@ -112,6 +125,8 @@ _Z5func2PdS_:
 	jmp	.L7
 .L6:
 	movsd	-8(%rbp), %xmm0
+	#movsd	.LC4(%rip), %xmm1
+	#mulsd	%xmm1, %xmm0
 	popq	%r14
 	popq	%r13
 	popq	%r12
@@ -184,6 +199,10 @@ main:
 .LC2:
 	.long	0
 	.long	1078525952
+	.align 8
+.LC3:
+	.long	0
+	.long	1098152671
 	.align 8
 .LC4:
 	.long	3100958126
