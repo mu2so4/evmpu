@@ -1,12 +1,11 @@
 #/bin/bash
 
+echo "compiling programs..."
 make >/dev/null
-
-echo "making programs"
 if [[ $? -ne 0 ]]; then
 	exit
 fi
-echo "programs made"
+echo "programs compiled"
 
 
 echo "prog0" | tee report.txt
