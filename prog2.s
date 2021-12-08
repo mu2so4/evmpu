@@ -20,9 +20,7 @@ _Z5func1PdS_:
 .L3:
 	cmpl	$49999999, %r12d
 	jg	.L2
-	movl	%r12d, %eax
-	cltq
-	leaq	0(,%rax,8), %rdx
+	leaq	0(,%r12,8), %rdx #changed
 	movq	%r13, %rax
 	leaq	(%rdx,%rax), %rbx
 	call	rand
@@ -35,9 +33,7 @@ _Z5func1PdS_:
 	movsd	.LC2(%rip), %xmm1
 	subsd	%xmm1, %xmm0
 	movsd	%xmm0, (%rbx)
-	movl	%r12d, %eax
-	cltq
-	leaq	0(,%rax,8), %rdx
+	leaq	0(,%r12,8), %rdx #changed
 	movq	%r14, %rax
 	leaq	(%rdx,%rax), %rbx
 	call	rand
@@ -84,9 +80,7 @@ _Z5func2PdS_:
 .L7:
 	cmpl	$49999999, %r12d
 	jg	.L6
-	movl	%r12d, %eax
-	cltq
-	leaq	0(,%rax,8), %rdx
+	leaq	0(,%r12,8), %rdx #changed
 	movq	%r13, %rax
 	addq	%rdx, %rax
 	movq	(%rax), %rax
@@ -96,9 +90,7 @@ _Z5func2PdS_:
 	movsd	.LC4(%rip), %xmm0
 	mulsd	%xmm0, %xmm1
 	movsd	%xmm1, -24(%rbp)
-	movl	%r12d, %eax
-	cltq
-	leaq	0(,%rax,8), %rdx
+	leaq	0(,%r12,8), %rdx #changed
 	movq	%r14, %rax
 	addq	%rdx, %rax
 	movq	(%rax), %rax
