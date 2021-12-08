@@ -1,4 +1,4 @@
-  .file	"prog.cpp"
+	.file	"prog.cpp"
 	.text
 	.globl	_Z5func1PdS_
 	.type	_Z5func1PdS_, @function
@@ -28,7 +28,9 @@ _Z5func1PdS_:
 	pxor	%xmm0, %xmm0
 	
 	cvtsi2sd	%eax, %xmm0
-	movsd	.LC3(%rip), %xmm1
+	movsd	.LC0(%rip), %xmm1
+	mulsd	%xmm1, %xmm0
+	movsd	.LC1(%rip), %xmm1
 	divsd	%xmm1, %xmm0
 	
 	movsd	.LC2(%rip), %xmm1
@@ -43,7 +45,9 @@ _Z5func1PdS_:
 	pxor	%xmm0, %xmm0
 	
 	cvtsi2sd	%eax, %xmm0
-	movsd	.LC3(%rip), %xmm1
+	movsd	.LC0(%rip), %xmm1
+	mulsd	%xmm1, %xmm0
+	movsd	.LC1(%rip), %xmm1
 	divsd	%xmm1, %xmm0
 	
 	movsd	.LC2(%rip), %xmm1
