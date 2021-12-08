@@ -2,9 +2,11 @@
 
 make >/dev/null
 
+echo "making programs"
 if [[ $? -ne 0 ]]; then
 	exit
 fi
+echo "programs made"
 
 
 echo "prog0" | tee report.txt
@@ -43,7 +45,7 @@ done
 echo -e "\n" >>report.txt
 
 
-echo "prog3" || tee -a report.txt
+echo "prog3" | tee -a report.txt
 echo -e "#\treal\tuser\tsys" >>report.txt
 for (( i = 0; i < 6 ; i++ ))
 do
