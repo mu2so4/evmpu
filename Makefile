@@ -3,4 +3,4 @@ CC=g++
 all: usb
 
 usb: usb.cpp
-	$(CC) usb.cpp -o usb
+	$(CC) -o usb –I/usr/include/libusb-1.0 usb.cpp -lusb-1.0
