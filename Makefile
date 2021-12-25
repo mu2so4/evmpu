@@ -1,15 +1,24 @@
 CC=g++
 CFLAGS=-std=c++11 -Wall
 
-all: usb linear
+all: usb opencv
+
+opencv: negative initial
 
 usb: usb.cpp
 	$(CC) $(CFLAGS) -o usb -I/usr/include/libusb-1.0 usb.cpp -lusb-1.0
 
-linear: main.o linear.o
-	$(CC) $(CFLAGS) main.o linear.o -o linear
-main.o: main.cpp
-	$(CC) -c $(CFLAGS) main.cpp /usr/lib/x86_64-linux-gnu/libopencv_core.a /usr/lib/x86_64-linux-gnu/libopencv_highgui.a -o main.o
+negative: main.o negative.o
+	$(CC) main.o negative.o -o negative -lopencv_core -lopencv_highgui
 
-linear.o: linear.o
-	$(CC) -c $(CFLAGS) linear.cpp /usr/lib/x86_64-linux-gnu/libopencv_core.a /usr/lib/x86_64-linux-gnu/libopencv_highgui.a -o linear.o
+initial: main.o initial.o
+	$(CC) main.o initial.o -o initial -lopencv_core -lopencv_highgui
+
+main.o: main.cpp
+	$(CC) -c $(CFLAGS) main.cpp -o main.o
+
+negative.o: negative.cpp
+	$(CC) -c $(CFLAGS) negative.cpp -o negative.o
+
+initial.o: initial.cpp
+	$(CC) -c $(CFLAGS) initial.cpp -o initial.o

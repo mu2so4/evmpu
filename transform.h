@@ -3,6 +3,6 @@
 
 #include <opencv2/highgui/highgui.hpp>
 
-void transformImage(IplImage &image);
+void transformImage(cv::Mat &mtr);
 
 #endif //TRANSFORM_H
