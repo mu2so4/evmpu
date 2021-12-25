@@ -77,6 +77,7 @@ void printdev(libusb_device *dev) {
             (int)config->bNumInterfaces
     );
     for(int i=0; i<(int)config->bNumInterfaces; i++) {
+	std::cout << i << "\n";
         inter = &config->interface[i];
         printf("| | | | | %.2d %.2d | | | |\n",
                 inter->num_altsetting,
