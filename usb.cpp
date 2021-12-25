@@ -23,7 +23,8 @@ int main() {
     }
     // задать уровень подробности отладочных сообщений
     libusb_set_debug(ctx, 3);
-    // получить список всех найденных USB- устройствcnt = libusb_get_device_list(ctx, &devs);
+    // получить список всех найденных USB- устройств
+    cnt = libusb_get_device_list(ctx, &devs);
         if(cnt < 0){
         fprintf(stderr,
         "Ошибка: список USB устройств не получен.\n", r);
@@ -31,17 +32,17 @@ int main() {
     }
     printf("найдено устройств: %d\n", cnt);
     printf("===========================================================\n");
-    printf("* количество возможных конфигураций\n");
-    printf("| * класс устройства\n");
-    printf("| | * идентификатор производителя\n");
-    printf("| | | * идентификатор устройства\n");
-    printf("| | | | * количество интерфейсов\n");
-    printf("| | | | | * количество альтернативных настроек\n");
-    printf("| | | | | | * класс устройства\n");
-    printf("| | | | | | | * номер интерфейса\n");
-    printf("| | | | | | | | * количество конечных точек\n");
-    printf("| | | | | | | | | * тип дескриптора\n");
-    printf("| | | | | | | | | | * адрес конечной точки\n");
+    printf("*количество возможных конфигураций\n");
+    printf("|\t* класс устройства\n");
+    printf("|\t| * идентификатор производителя\n");
+    printf("|\t|\t| * идентификатор устройства\n");
+    printf("|\t|\t|\t| * количество интерфейсов\n");
+    printf("|\t|\t|\t|\t| * количество альтернативных настроек\n");
+    printf("|\t|\t|\t|\t|\t| * класс устройства\n");
+    printf("|\t|\t|\t|\t|\t|\t| * номер интерфейса\n");
+    printf("|\t|\t|\t|\t|\t|\t|\t|\t* количество конечных точек\n");
+    printf("|\t|\t|\t|\t|\t|\t|\t|\t|\t* тип дескриптора\n");
+    printf("|\t|\t|\t|\t|\t|\t|\t|\t|\t|\t* адрес конечной точки\n");
     printf("+--+--+----+----+---+--+--+--+--+--+----------------------\n");
     for(i = 0; i < cnt; i++) { // цикл перебора всех устройств
         printdev(devs[i]);
@@ -70,7 +71,7 @@ void printdev(libusb_device *dev) {
     }
     // получить конфигурацию устройства
     libusb_get_config_descriptor(dev, 0, &config);
-    printf("%.2d %.2d %.4d %.4d %.3d | | | | | |\n",(int)desc.bNumConfigurations,
+    printf("%.2d\t%.2d\t%.4d\t%.4d\t%.3d\t|\t|\t|\t|\t|\t|\n",(int)desc.bNumConfigurations,
             (int)desc.bDeviceClass,
             desc.idVendor,
             desc.idProduct,
@@ -79,19 +80,19 @@ void printdev(libusb_device *dev) {
     for(int i=0; i<(int)config->bNumInterfaces; i++) {
 	std::cout << i << "\n";
         inter = &config->interface[i];
-        printf("| | | | | %.2d %.2d | | | |\n",
+        printf("|\t|\t|\t|\t| %.2d\t%.2d\t|\t|\t|\t|\n",
                 inter->num_altsetting,
                 (int)desc.bDeviceClass
         );
         for(int j=0; j<inter->num_altsetting; j++) {
             interdesc = &inter->altsetting[j];
-            printf("| | | | | | | %.2d %.2d | |\n",
+            printf("|\t|\t|\t|\t|\t|\t|\t%.2d\t%.2d\t|\t|\n",
                     (int)interdesc->bInterfaceNumber,
                     (int)interdesc->bNumEndpoints
             );
             for(int k=0; k<(int)interdesc->bNumEndpoints; k++) {
                 epdesc = &interdesc->endpoint[k];
-                printf("| | | | | | | | | %.2d %.9d\n",
+                printf("|\t|\t|\t|\t|\t|\t|\t|\t|\t%.2d\t%.9d\n",
                         (int)epdesc->bDescriptorType,
                         (int)(int)epdesc->bEndpointAddress
                 );
