@@ -1,0 +1,10 @@
+found devices: 5
+===========================================================
+class	subcl	vendor	product	serial	name	vendor
+ID	ID	ID	ID	number
+0x09	0x00	7531	3	0000:00:15.0	xHCI Host Controller	Linux 5.4.0-91-generic xhci-hcd
+0xe0	0x01	3034	2081	00e04c000001	Bluetooth Radio 	Realtek 
+0xef	0x02	1266	46551	0x0001	EasyCamera	Chicony Electronics Co.,Ltd.
+0x00	0x00	2362	9488	----	USB Optical Mouse	PixArt
+0x09	0x00	7531	2	0000:00:15.0	xHCI Host Controller	Linux 5.4.0-91-generic xhci-hcd
+===========================================================
